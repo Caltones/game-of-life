@@ -13,6 +13,7 @@ import StartIcon from '@mui/icons-material/Start';
 import ClearIcon from '@mui/icons-material/Clear';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
 import ViewComfyIcon from '@mui/icons-material/ViewComfy';
+import PauseIcon from '@mui/icons-material/Pause';
 function App() {
   const col = 25;
   const row = 25;
@@ -89,7 +90,7 @@ function App() {
         />
       </div>
       <Typography variant="body1">Generation: {gen}</Typography>
-      <Button endIcon={<StartIcon />} variant="outlined" onClick={runHandler}>
+      <Button endIcon={run?<PauseIcon/>:<StartIcon />} variant="outlined" onClick={runHandler}>
         {run ? 'Pause' : 'Start'}
       </Button>
       <Button endIcon={<ClearIcon />} variant="outlined" onClick={clearHandler}>
