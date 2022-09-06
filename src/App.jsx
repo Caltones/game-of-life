@@ -72,7 +72,6 @@ function App() {
     setGrid(lwss);
   };
   const keyDownHadler=(e)=>{
-    console.log(e.code)
     if (e.code =='Space'){
       runHandler()
       return
