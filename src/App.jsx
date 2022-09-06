@@ -45,7 +45,7 @@ function App() {
     setRun(false);
   };
   const runHandler = () => {
-    setRun(!run);
+    setRun(prevRun=>!prevRun);
   };
   const clickHandler = (e) => {
     if (run) return;
@@ -53,7 +53,7 @@ function App() {
     const copy = [...grid];
     copy[x][y] = copy[x][y] === 0 ? 1 : 0;
     setGrid(copy);
-    console.log(copy);
+
   };
   const patternHandler = (e) => {
     setAnchorEl(e.currentTarget);
@@ -71,8 +71,23 @@ function App() {
     if (run) return;
     setGrid(lwss);
   };
+  const keyDownHadler=(e)=>{
+    console.log(e.code)
+    if (e.code =='Space'){
+      runHandler()
+      return
+    }
+    if(e.code=='KeyR'){
+      randomHandler()
+      return
+    }
+    if(e.code=='KeyC'){
+      clearHandler()
+      return
+    }
+  }
   return (
-    <div>
+    <div  onKeyUp={keyDownHadler} tabIndex={"0"}>
       <div
         className="App"
         style={{
@@ -90,7 +105,11 @@ function App() {
         />
       </div>
       <Typography variant="body1">Generation: {gen}</Typography>
-      <Button endIcon={run?<PauseIcon/>:<StartIcon />} variant="outlined" onClick={runHandler}>
+      <Button
+        endIcon={run ? <PauseIcon /> : <StartIcon />}
+        variant="outlined"
+        onClick={runHandler}
+      >
         {run ? 'Pause' : 'Start'}
       </Button>
       <Button endIcon={<ClearIcon />} variant="outlined" onClick={clearHandler}>
